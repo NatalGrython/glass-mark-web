@@ -1,0 +1,11 @@
+@import "./clear.scss";
+@import "./variables.scss";
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  min-height: 100%;
+  background-color: $background_color;
+}

@@ -1,44 +1,38 @@
-import { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./styles/global.scss";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import Tabs from "./components/Tab";
+import RegistrationPage from "./pages/RegistrationPage";
+import { onInit } from "./hooks/onInit";
+import Protected from "./components/ProtectedRoute";
 
 function App() {
-  const [count, setCount] = useState(0);
+  onInit();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count} ХЕЕЕЕЕЙ
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Navigate to="/login" />} />
+        <Route element={<Tabs />}>
+          <Route
+            path="login"
+            element={
+              <Protected protectAuth={false}>
+                <LoginPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="registration"
+            element={
+              <Protected protectAuth={false}>
+                <RegistrationPage />
+              </Protected>
+            }
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { map } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { LoginUserDto } from './dto/login-user.dto';
 import { RegistrationUserDto } from './dto/register-user.dto';
 
@@ -12,15 +12,27 @@ export class AuthService {
     const host = process.env.PROXY_SERVICE_HOST;
     const port = Number(process.env.PROXY_SERVICE_PORT);
     return this.httpService
-      .post(`http://${host}:${port}/registration`, registrationUserDto)
+      .post(`http://${host}:${port}/auth/registration`, registrationUserDto)
       .pipe(map((item) => item.data));
   }
 
   login(loginUserDto: LoginUserDto) {
-    const host = process.env.PROXY_SERVICE_HOST;
-    const port = Number(process.env.PROXY_SERVICE_PORT);
-    return this.httpService
-      .post(`http://${host}:${port}/login`, loginUserDto)
-      .pipe(map((item) => item.data));
+    try {
+      const host = process.env.PROXY_SERVICE_HOST;
+      const port = Number(process.env.PROXY_SERVICE_PORT);
+      console.log(host, port);
+      return this.httpService
+        .post(`http://${host}:${port}/auth/login`, loginUserDto)
+        .pipe(
+          map((item) => item.data),
+          catchError((error) => {
+            console.log(error.data);
+            return of(error);
+          }),
+        );
+    } catch (error) {
+      console.log(error);
+      return 'ne ok';
+    }
   }
 }

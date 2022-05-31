@@ -1,0 +1,59 @@
+.tabs {
+  padding-top: 45px;
+  padding-bottom: 35px;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .button_container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-left {
+    padding: 10px 55px;
+    span {
+      @include textInter(16px, 500, 21px);
+    }
+
+    background: $background_color;
+    /* Blue /Primary action */
+    border: 2px solid $primary_color;
+    border-radius: 8px 0px 0px 8px;
+
+    &__active {
+      @extend .button-left;
+      background-color: $primary_color;
+
+      border-radius: 8px 0px 0px 8px;
+      span {
+        color: $background_color;
+      }
+    }
+  }
+
+  .button-right {
+    padding: 10px 55px;
+    span {
+      @include textInter(16px, 500, 21px);
+    }
+
+    background: $background_color;
+    /* Blue /Primary action */
+    border: 2px solid $primary_color;
+    border-radius: 0px 8px 8px 0px;
+
+    &__active {
+      @extend .button-left;
+      background-color: $primary_color;
+
+      border-radius: 0px 8px 8px 0px;
+      span {
+        color: $background_color;
+      }
+    }
+  }
+}
