@@ -1,0 +1,39 @@
+FROM node:latest as builder
+
+COPY package.json package-lock.json ./
+
+RUN npm i && mkdir /web && mv ./node_modules ./web
+
+WORKDIR /web
+
+COPY . . 
+
+ARG GLASS_MARK_SERVER_HOST
+ARG GLASS_MARK_SERVER_PORT
+ARG GLASS_MARK_CLIENT_PORT
+
+
+ENV GLASS_MARK_SERVER_HOST ${GLASS_MARK_SERVER_HOST}
+ENV GLASS_MARK_SERVER_PORT ${GLASS_MARK_SERVER_PORT}
+ENV GLASS_MARK_CLIENT_PORT ${GLASS_MARK_CLIENT_PORT}
+
+RUN npm run build
+
+FROM nginx:latest
+
+COPY ./.nginx/nginx.template.conf /etc/nginx/nginx.template.conf
+COPY ./.nginx/run_nginx.sh /
+
+RUN chmod +x /run_nginx.sh
+
+
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=builder /web/dist /usr/share/nginx/html
+
+WORKDIR /usr/share/nginx/html
+
+EXPOSE 80
+
+ENTRYPOINT [ "/run_nginx.sh" ]
+

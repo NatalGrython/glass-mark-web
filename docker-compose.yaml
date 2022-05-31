@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./server
+    environment:
+      PROXY_SERVICE_HOST: ${PROXY_SERVICE_HOST}
+      PROXY_SERVICE_PORT: ${PROXY_SERVICE_PORT}
+      SERVICE_PORT: ${SERVICE_PORT}
+    restart: always
+  frontend:
+    build:
+      context: ./client
+      args:
+        GLASS_MARK_SERVER_HOST: ${SERVICE_HOST}
+        GLASS_MARK_SERVER_PORT: ${SERVICE_PORT}
+        GLASS_MARK_CLIENT_PORT: ${GLASS_MARK_CLIENT_PORT}
+    environment:
+      GLASS_MARK_SERVER_HOST: ${SERVICE_HOST}
+      GLASS_MARK_SERVER_PORT: ${SERVICE_PORT}
+      GLASS_MARK_CLIENT_PORT: ${GLASS_MARK_CLIENT_PORT}
+    ports:
+      - "${GLASS_MARK_CLIENT_PORT}:${GLASS_MARK_CLIENT_PORT}"
+    restart: always
+    links:
+      - backend
+    depends_on:
+      - backend
