@@ -4,6 +4,7 @@ import { NodeModule } from './node/node.module';
 import { UserModule } from './user/user.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { ConfigModule } from '@nestjs/config';
+import { TableModule } from './table/table.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
     NodeModule,
     UserModule,
     TransactionModule,
+    TableModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [],

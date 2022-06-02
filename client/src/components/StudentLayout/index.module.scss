@@ -1,0 +1,56 @@
+.student-layout {
+  position: relative;
+  z-index: 1;
+
+  .link__container {
+    width: 190px;
+    height: 40px;
+  }
+
+  .link__container_left {
+    width: 160px;
+    height: 40px;
+  }
+
+  &__links {
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(48, 58, 64, 0.1);
+    border-radius: 8px;
+    height: 64px;
+    padding: 12px 18px;
+    gap: 24px;
+  }
+
+  &__link {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    padding: 11px 18px;
+    align-items: center;
+    background-color: inherit;
+    border: none;
+
+    span {
+      @include textRoboto(20px, 500, 23px, $black_color);
+    }
+
+    &__active {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+      padding: 11px 18px;
+      box-shadow: 0px 4px 12px rgba(16, 156, 241, 0.1);
+      border-radius: 8px;
+      align-items: center;
+      background-color: inherit;
+      border: none;
+      span {
+        @include textRoboto(20px, 500, 23px, $primary_color);
+      }
+    }
+  }
+}

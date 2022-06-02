@@ -3,6 +3,8 @@ import { call, takeLatest, put, SagaReturnType } from "redux-saga/effects";
 import { loginApi } from "../../api/auth/login";
 import { registrationApi } from "../../api/auth/registration";
 import { Token } from "../../types/shared/common";
+import { getTableAction } from "../table/actions";
+import { getUserAction } from "../user/action";
 import {
   loginAction,
   authorizationSuccessAction,
@@ -14,6 +16,7 @@ function* authorizationSuccess(token: string) {
   localStorage.setItem("token", token);
   const decodedToken = jwtDecode<Token>(token);
   yield put(authorizationSuccessAction({ token, role: decodedToken.role }));
+  yield put(getUserAction(decodedToken.id));
 }
 
 function* login(action: ReturnType<typeof loginAction>) {

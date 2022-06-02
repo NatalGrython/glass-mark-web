@@ -1,0 +1,23 @@
+.header {
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  height: 95px;
+  background-color: #fff;
+  position: relative;
+  z-index: 2;
+
+  &__content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__button_container {
+    width: 155px;
+    height: 55px;
+  }
+  &__name {
+    @include textRoboto(22px, 500, 25px, $grey_color);
+  }
+}

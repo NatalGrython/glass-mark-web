@@ -5,6 +5,13 @@ import Tabs from "./components/Tab";
 import RegistrationPage from "./pages/RegistrationPage";
 import { onInit } from "./hooks/onInit";
 import Protected from "./components/ProtectedRoute";
+import Header from "./components/Header";
+import StudentLayout from "./components/StudentLayout";
+import TeacherLayout from "./components/TeacherLayout";
+import MyBallsPage from "./pages/MyBallPage";
+import Layout from "./components/Layout";
+import AllBallsPage from "./pages/AllBallsPage";
+import AddBallsPage from "./pages/AddBallsPage";
 
 function App() {
   onInit();
@@ -12,24 +19,38 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Navigate to="/login" />} />
-        <Route element={<Tabs />}>
-          <Route
-            path="login"
-            element={
-              <Protected protectAuth={false}>
-                <LoginPage />
-              </Protected>
-            }
-          />
-          <Route
-            path="registration"
-            element={
-              <Protected protectAuth={false}>
-                <RegistrationPage />
-              </Protected>
-            }
-          />
+        <Route element={<Layout />}>
+          <Route index element={<Navigate to="/login" />} />
+          <Route element={<Tabs />}>
+            <Route
+              path="login"
+              element={
+                <Protected protectAuth={false}>
+                  <LoginPage />
+                </Protected>
+              }
+            />
+            <Route
+              path="registration"
+              element={
+                <Protected protectAuth={false}>
+                  <RegistrationPage />
+                </Protected>
+              }
+            />
+          </Route>
+          <Route element={<Header />}>
+            <Route path="/student" element={<StudentLayout />}>
+              <Route index element={<Navigate to="/student/my" />} />
+              <Route path="my" element={<MyBallsPage />} />
+              <Route path="all" element={<AllBallsPage />} />
+            </Route>
+            <Route path="/teacher" element={<TeacherLayout />}>
+              <Route index element={<Navigate to="/teacher/mark" />} />
+              <Route path="mark" element={<AddBallsPage />} />
+              <Route path="all" element={<AllBallsPage />} />
+            </Route>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

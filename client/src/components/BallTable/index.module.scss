@@ -1,0 +1,51 @@
+.ball-content {
+  position: relative;
+}
+
+.ball-table {
+  width: 100%;
+  height: 630px;
+  overflow-y: auto;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background-color: #fff;
+
+  &__container {
+    margin: 0 auto;
+    max-width: 1120px;
+  }
+
+  &__big_ball_button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 60px;
+    background-color: $primary_color;
+    border: none;
+    border-radius: 10px;
+    bottom: calc(100% - 25px);
+    span {
+      @include textInter(22px, 600, 21px, #fff);
+    }
+  }
+
+  &__title {
+    @include textRoboto(22px, 500, 25px, $grey_color);
+  }
+
+  &__table {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 56px auto;
+  }
+
+  &__text {
+    @include textRoboto(20px, 400, 23px, $black_color);
+    border-bottom: 1px solid $grey_color;
+    padding-top: 20px;
+    padding-bottom: 15px;
+  }
+}

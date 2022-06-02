@@ -11,7 +11,7 @@ export class NodeService {
     const port = Number(process.env.PROXY_SERVICE_PORT);
 
     return this.httpService
-      .get<{ address: string; port: number }[]>(`http://${host}:${port}/node`)
+      .get<{ host: string; port: number }[]>(`http://${host}:${port}/node`)
       .pipe(map((item) => item.data));
   }
 
@@ -20,9 +20,7 @@ export class NodeService {
     const port = Number(process.env.PROXY_SERVICE_PORT);
 
     return this.httpService
-      .get<{ address: string; port: number }>(
-        `http://${host}:${port}/node/${id}`,
-      )
+      .get<{ host: string; port: number }>(`http://${host}:${port}/node/${id}`)
       .pipe(map((item) => item.data));
   }
 }

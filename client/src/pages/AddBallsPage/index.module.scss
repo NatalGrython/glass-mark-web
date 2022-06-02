@@ -1,0 +1,57 @@
+.add-balls {
+  padding-top: 60px;
+
+  &__content {
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding-top: 28px;
+    padding-bottom: 18px;
+  }
+
+  &__inner_container {
+    margin: 0 auto;
+    max-width: 1160px;
+  }
+
+  &__inner__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form {
+    display: grid;
+    grid-template-columns: 190px 1fr 400px;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row-gap: 20px;
+    grid-column-gap: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    align-items: center;
+  }
+
+  .title {
+    @include textRoboto(20px, 400, 23px, $black_color);
+  }
+
+  .text {
+    @include textRoboto(16px, 400, 18px, $grey_color);
+  }
+
+  .controllers__container {
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      background: #ffffff;
+      border: 1px solid #109cf1;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      border: 2px solid $primary_color;
+      padding: 6px 30px;
+      span {
+        @include textRoboto(20px, 500, 23px, $primary_color);
+      }
+    }
+  }
+}

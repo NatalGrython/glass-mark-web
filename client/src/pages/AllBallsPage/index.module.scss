@@ -1,0 +1,12 @@
+.all {
+  padding-bottom: 55px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    height: 600px;
+    overflow-y: auto;
+    padding-top: 50px;
+  }
+}
