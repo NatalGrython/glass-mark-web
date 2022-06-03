@@ -1,7 +1,8 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { Exit } from "../../icons";
+import { logout } from "../../store/auth/actions";
 import { userSelector } from "../../store/user/selectors";
 import Button from "../UI/Button";
 import classNames from "./index.module.scss";
@@ -11,8 +12,9 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   const user = useSelector(userSelector);
+  const dispatch = useDispatch();
   const onExit = () => {
-    console.log("exit");
+    dispatch(logout());
   };
   return (
     <>

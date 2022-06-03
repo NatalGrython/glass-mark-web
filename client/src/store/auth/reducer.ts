@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { authorizationSuccessAction } from "./actions";
+import { authorizationSuccessAction, logout } from "./actions";
 
 interface AuthState {
   token?: string;
@@ -9,8 +9,13 @@ interface AuthState {
 const initialState: AuthState = {};
 
 export const authReducer = createReducer(initialState, (builder) =>
-  builder.addCase(authorizationSuccessAction, (state, action) => {
-    state.token = action.payload.token;
-    state.role = action.payload.role;
-  })
+  builder
+    .addCase(authorizationSuccessAction, (state, action) => {
+      state.token = action.payload.token;
+      state.role = action.payload.role;
+    })
+    .addCase(logout, (state) => {
+      state.role = undefined;
+      state.token = undefined;
+    })
 );

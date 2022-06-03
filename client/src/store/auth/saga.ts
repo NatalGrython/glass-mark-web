@@ -3,14 +3,19 @@ import { call, takeLatest, put, SagaReturnType } from "redux-saga/effects";
 import { loginApi } from "../../api/auth/login";
 import { registrationApi } from "../../api/auth/registration";
 import { Token } from "../../types/shared/common";
-import { getTableAction } from "../table/actions";
-import { getUserAction } from "../user/action";
+import { deleteNodes } from "../nodes/actions";
+import { deleteTableAction, getTableAction } from "../table/actions";
+import {
+  deleteUserAction,
+  deleteUsersAction,
+  getUserAction,
+} from "../user/action";
 import {
   loginAction,
   authorizationSuccessAction,
   registrationAction,
 } from "./actions";
-import { CHECK_AUTHORIZATION, LOGIN, REGISTRATION } from "./constants";
+import { CHECK_AUTHORIZATION, LOGIN, LOGOUT, REGISTRATION } from "./constants";
 
 function* authorizationSuccess(token: string) {
   localStorage.setItem("token", token);
@@ -50,8 +55,16 @@ function* checkAuthorization() {
   }
 }
 
+function* logout() {
+  localStorage.removeItem("token");
+  yield put(deleteUserAction());
+  yield put(deleteTableAction());
+  yield put(deleteUsersAction());
+}
+
 export function* authWatcher() {
   yield takeLatest(LOGIN, login);
   yield takeLatest(REGISTRATION, registration);
   yield takeLatest(CHECK_AUTHORIZATION, checkAuthorization);
+  yield takeLatest(LOGOUT, logout);
 }

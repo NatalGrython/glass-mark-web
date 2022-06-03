@@ -22,7 +22,6 @@ const BallTableAll: FC<BallTableAllProps> = ({
     <div className={classNames["ball-all-content"]}>
       <div
         style={{
-          height: open ? "630px" : "0px",
           boxShadow: open ? undefined : "none",
           overflowY: open ? "auto" : "visible",
         }}

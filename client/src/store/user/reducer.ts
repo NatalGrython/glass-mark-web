@@ -1,6 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { User } from "../../types/shared/user";
 import {
+  deleteUserAction,
+  deleteUsersAction,
   getAllUsersAction,
   getAllUsersSuccessAction,
   getUserSuccessAction,
@@ -22,5 +24,11 @@ export const userReducer = createReducer(initialState, (builder) =>
     })
     .addCase(getAllUsersSuccessAction, (state, action) => {
       state.users = action.payload;
+    })
+    .addCase(deleteUserAction, (state) => {
+      state.user = undefined;
+    })
+    .addCase(deleteUsersAction, (state) => {
+      state.users = [];
     })
 );

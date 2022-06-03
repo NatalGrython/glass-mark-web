@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getTableSuccessAction } from "./actions";
+import { deleteTableAction, getTableSuccessAction } from "./actions";
 
 interface TableState {
   table: any[];
@@ -10,8 +10,12 @@ const initialState: TableState = {
 };
 
 export const tableReducer = createReducer(initialState, (builder) =>
-  builder.addCase(getTableSuccessAction, (state, action) => {
-    //@ts-ignore
-    state.table = action.payload;
-  })
+  builder
+    .addCase(getTableSuccessAction, (state, action) => {
+      //@ts-ignore
+      state.table = action.payload;
+    })
+    .addCase(deleteTableAction, (state) => {
+      state.table = [];
+    })
 );

@@ -28,10 +28,8 @@ export class TableService {
     const students = allUsers.filter((item) => item.role === 'student');
     const table = currentBlockChain.reduce((acc, block) => {
       students.forEach((user) => {
-        if (
-          block.mappingData[user.address] &&
-          !acc.find((item) => item.login === user.login)
-        ) {
+        const currentUser = acc.find((item) => item.login === user.login);
+        if (block.mappingData[user.address] && !currentUser) {
           acc.push({
             login: user.login,
             name: user.name,
@@ -47,21 +45,26 @@ export class TableService {
                 hash: item.currentHash,
               })),
           });
-        } else if (acc.find((item) => item.login === user.login)) {
-          acc = acc.map((item) => ({
-            ...item,
-            transactions: [
-              ...item.transactions,
-              ...block.transactions
-                .filter((tx) => tx.receiver === user.address)
-                .map((item) => ({
-                  sender: item.sender,
-                  value: item.value,
-                  reason: item.reason,
-                  hash: item.currentHash,
-                })),
-            ],
-          }));
+        } else if (!!currentUser) {
+          acc = acc.map((item) => {
+            if (item.login === currentUser.login) {
+              return {
+                ...item,
+                transactions: [
+                  ...item.transactions,
+                  ...block.transactions
+                    .filter((tx) => tx.receiver === user.address)
+                    .map((item) => ({
+                      sender: item.sender,
+                      value: item.value,
+                      reason: item.reason,
+                      hash: item.currentHash,
+                    })),
+                ],
+              };
+            }
+            return item;
+          });
         }
       });
       return acc;
@@ -80,6 +83,8 @@ export class TableService {
       }),
     }));
 
-    return updatedTable;
+    return updatedTable.sort(
+      (prevValue, nextValue) => nextValue.balance - prevValue.balance,
+    );
   }
 }

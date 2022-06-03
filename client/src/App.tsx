@@ -32,12 +32,26 @@ function App() {
             />
           </Route>
           <Route element={<Header />}>
-            <Route path="/student" element={<StudentLayout />}>
+            <Route
+              path="/student"
+              element={
+                <Protected protectAuth>
+                  <StudentLayout />
+                </Protected>
+              }
+            >
               <Route index element={<Navigate to="/student/my" />} />
               <Route path="my" element={<MyBallsPage />} />
               <Route path="all" element={<AllBallsPage />} />
             </Route>
-            <Route path="/teacher" element={<TeacherLayout />}>
+            <Route
+              path="/teacher"
+              element={
+                <Protected protectAuth>
+                  <TeacherLayout />
+                </Protected>
+              }
+            >
               <Route index element={<Navigate to="/teacher/mark" />} />
               <Route path="mark" element={<AddBallsPage />} />
               <Route path="all" element={<AllBallsPage />} />
