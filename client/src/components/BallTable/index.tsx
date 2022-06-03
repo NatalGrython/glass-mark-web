@@ -29,7 +29,8 @@ const BallTable: FC<BallTableProps> = () => {
               my.transactions.map((item: any) => (
                 <Fragment key={item.hash}>
                   <span className={classNames["ball-table__text"]}>
-                    {item.sender}
+                    {item.sender.surname} {item.sender.name}{" "}
+                    {item.sender.patronymic}
                   </span>
                   <span className={classNames["ball-table__text"]}>
                     {item.reason}
