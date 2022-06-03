@@ -38,6 +38,10 @@ export class TransactionService {
             value: Number(createTransactionDto.value),
             recipient: receiver.address,
             reason: createTransactionDto.reason,
+            hard: createTransactionDto.hard,
+          },
+          {
+            timeout: 1000000,
           },
         )
         .pipe(map((item) => item.data)),

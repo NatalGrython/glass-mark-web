@@ -4,13 +4,13 @@ import { tablesSelector } from "../../store/table/selector";
 import classNames from "./index.module.scss";
 
 interface BallTableAllProps {
-  login: string;
+  text: string;
   transactions: any[];
   balance: number;
 }
 
 const BallTableAll: FC<BallTableAllProps> = ({
-  login,
+  text,
   transactions,
   balance,
 }) => {
@@ -62,7 +62,7 @@ const BallTableAll: FC<BallTableAllProps> = ({
         </div>
         <div className={classNames["ball-table-all__container"]}>
           <button className={classNames["ball-table-all__big_ball_button"]}>
-            <span>{login}</span>
+            <span>{text}</span>
           </button>
           {open && (
             <div className={classNames["ball-table-all__table"]}>
@@ -78,7 +78,8 @@ const BallTableAll: FC<BallTableAllProps> = ({
               {transactions.map((item) => (
                 <Fragment key={item.hash}>
                   <span className={classNames["ball-table-all__text"]}>
-                    {item.sender}
+                    {item.sender.surname} {item.sender.name}{" "}
+                    {item.sender.patronymic}
                   </span>
                   <span className={classNames["ball-table-all__text"]}>
                     {item.reason}

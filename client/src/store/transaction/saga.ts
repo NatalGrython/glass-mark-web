@@ -1,5 +1,6 @@
-import { call, select, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import { createTransactionApi } from "../../api/transaction/create";
+import { getTableAction } from "../table/actions";
 import { userSelector } from "../user/selectors";
 import { createTransactionSuccessAction } from "./action";
 import { CREATE_TRANSACTION } from "./constants";
@@ -14,6 +15,7 @@ function* createTransaction(action: any) {
       nodeId: user?.node.id,
     });
     yield createTransactionSuccessAction();
+    yield put(getTableAction());
   } catch (error) {
     console.log(error);
   }

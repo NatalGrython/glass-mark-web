@@ -30,14 +30,6 @@ function App() {
                 </Protected>
               }
             />
-            <Route
-              path="registration"
-              element={
-                <Protected protectAuth={false}>
-                  <RegistrationPage />
-                </Protected>
-              }
-            />
           </Route>
           <Route element={<Header />}>
             <Route path="/student" element={<StudentLayout />}>

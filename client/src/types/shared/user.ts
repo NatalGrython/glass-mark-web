@@ -6,4 +6,7 @@ export interface User {
   login: string;
   role: "student" | "teacher";
   node: Node;
+  name: string;
+  surname: string;
+  patronymic: string;
 }

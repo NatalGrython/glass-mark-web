@@ -29,7 +29,7 @@ const AddBallsPage: FC<AddBallsPageProps> = () => {
                   }}
                   //@ts-ignore
                   options={students.map((item) => ({
-                    text: item.login,
+                    text: `${item.surname} ${item.name} ${item.patronymic}`,
                     value: item.id,
                   }))}
                 />

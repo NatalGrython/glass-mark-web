@@ -15,7 +15,7 @@ const AllBallsPage: FC<AllBallsPageProps> = () => {
           {table.map((item) => (
             <BallTableAll
               balance={item.balance}
-              login={item.login}
+              text={`${item.surname} ${item.name} ${item.patronymic}`}
               transactions={item.transactions}
             />
           ))}

@@ -20,7 +20,9 @@ const Header: FC<HeaderProps> = () => {
         <div className="container">
           <div className={classNames.header__content}>
             <Logo />
-            <span className={classNames.header__name}>{user?.login}</span>
+            <span className={classNames.header__name}>
+              {user?.surname} {user?.name} {user?.patronymic}
+            </span>
             <div className={classNames.header__button_container}>
               <Button onClick={onExit} textSize="big" icon={Exit}>
                 Выйти

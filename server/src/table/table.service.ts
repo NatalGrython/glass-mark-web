@@ -28,9 +28,15 @@ export class TableService {
     const students = allUsers.filter((item) => item.role === 'student');
     const table = currentBlockChain.reduce((acc, block) => {
       students.forEach((user) => {
-        if (block.mappingData[user.address]) {
+        if (
+          block.mappingData[user.address] &&
+          !acc.find((item) => item.login === user.login)
+        ) {
           acc.push({
             login: user.login,
+            name: user.name,
+            surname: user.surname,
+            patronymic: user.patronymic,
             balance: block.mappingData[user.address],
             transactions: block.transactions
               .filter((tx) => tx.receiver === user.address)
@@ -41,6 +47,21 @@ export class TableService {
                 hash: item.currentHash,
               })),
           });
+        } else if (acc.find((item) => item.login === user.login)) {
+          acc = acc.map((item) => ({
+            ...item,
+            transactions: [
+              ...item.transactions,
+              ...block.transactions
+                .filter((tx) => tx.receiver === user.address)
+                .map((item) => ({
+                  sender: item.sender,
+                  value: item.value,
+                  reason: item.reason,
+                  hash: item.currentHash,
+                })),
+            ],
+          }));
         }
       });
       return acc;
@@ -53,7 +74,7 @@ export class TableService {
           (user) => tx.sender === user.address,
         );
         if (currentSender) {
-          return { ...tx, sender: currentSender.login };
+          return { ...tx, sender: { ...currentSender } };
         }
         return { ...tx, sender: 'SYSTEM' };
       }),

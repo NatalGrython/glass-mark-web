@@ -4,7 +4,8 @@ export const createTransactionApi = async (createTransactionDto: any) => {
   try {
     const { data } = await apiAdapter.post(
       "/transaction",
-      createTransactionDto
+      createTransactionDto,
+      { timeout: 1000000 }
     );
     return data;
   } catch (error) {
