@@ -11,6 +11,7 @@ declare const classNames: {
   readonly "ball-table-all__title": "ball-table-all__title";
   readonly "ball-table-all__table": "ball-table-all__table";
   readonly "ball-table-all__text": "ball-table-all__text";
+  readonly "ball-table-all__danger_text": "ball-table-all__danger_text";
 };
 export default classNames;
 export type ClassNames =
@@ -25,4 +26,5 @@ export type ClassNames =
   | "ball-table-all__big_ball_button"
   | "ball-table-all__title"
   | "ball-table-all__table"
-  | "ball-table-all__text";
+  | "ball-table-all__text"
+  | "ball-table-all__danger_text";

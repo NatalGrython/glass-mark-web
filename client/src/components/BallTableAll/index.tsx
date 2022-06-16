@@ -9,6 +9,17 @@ interface BallTableAllProps {
   balance: number;
 }
 
+const getItemReason = (tx: any, txs: any[]) => {
+  if (typeof tx.sender !== "string") {
+    return tx.reason;
+  }
+
+  const [_, hash] = tx.reason.split(" ");
+  const cancelTx = txs.find((item) => item.hash === hash);
+
+  return `Отмена (${cancelTx.sender.surname} ${cancelTx.sender.name} ${cancelTx.sender.patronymic}, ${cancelTx.reason})`;
+};
+
 const BallTableAll: FC<BallTableAllProps> = ({
   text,
   transactions,
@@ -76,14 +87,33 @@ const BallTableAll: FC<BallTableAllProps> = ({
               </span>
               {transactions.map((item) => (
                 <Fragment key={item.hash}>
-                  <span className={classNames["ball-table-all__text"]}>
-                    {item.sender.surname} {item.sender.name}{" "}
-                    {item.sender.patronymic}
+                  <span
+                    className={
+                      typeof item.sender !== "string"
+                        ? classNames["ball-table-all__text"]
+                        : classNames["ball-table-all__danger_text"]
+                    }
+                  >
+                    {typeof item.sender === "string"
+                      ? "Администратор"
+                      : `${item.sender.surname} ${item.sender.name} ${item.sender.patronymic}`}
                   </span>
-                  <span className={classNames["ball-table-all__text"]}>
-                    {item.reason}
+                  <span
+                    className={
+                      typeof item.sender !== "string"
+                        ? classNames["ball-table-all__text"]
+                        : classNames["ball-table-all__danger_text"]
+                    }
+                  >
+                    {getItemReason(item, transactions)}
                   </span>
-                  <span className={classNames["ball-table-all__text"]}>
+                  <span
+                    className={
+                      typeof item.sender !== "string"
+                        ? classNames["ball-table-all__text"]
+                        : classNames["ball-table-all__danger_text"]
+                    }
+                  >
                     {item.value}
                   </span>
                 </Fragment>
