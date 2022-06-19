@@ -26,8 +26,6 @@ export class TransactionService {
       req,
     );
 
-    console.log({ sender, receiver });
-
     return firstValueFrom(
       this.httpService
         .post(

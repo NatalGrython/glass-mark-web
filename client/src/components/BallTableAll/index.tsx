@@ -9,7 +9,7 @@ interface BallTableAllProps {
   balance: number;
 }
 
-const getItemReason = (tx: any, txs: any[]) => {
+export const getItemReason = (tx: any, txs: any[]) => {
   if (typeof tx.sender !== "string") {
     return tx.reason;
   }

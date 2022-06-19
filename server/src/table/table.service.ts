@@ -29,7 +29,10 @@ export class TableService {
     const table = currentBlockChain.reduce((acc, block) => {
       students.forEach((user) => {
         const currentUser = acc.find((item) => item.login === user.login);
-        if (block.mappingData[user.address] && !currentUser) {
+        if (
+          typeof block.mappingData[user.address] !== 'undefined' &&
+          !currentUser
+        ) {
           acc.push({
             login: user.login,
             name: user.name,

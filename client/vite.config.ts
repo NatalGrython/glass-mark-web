@@ -9,14 +9,14 @@ export default defineConfig(({ mode }) => ({
 
   server: {
     proxy: {
-      "/api": "http://151.248.118.164",
-      // {
-      //   target: "http://localhost:5000",
-      //   rewrite(path) {
-      //     const data = path.replace("/api", "");
-      //     return data;
-      //   },
-      // },
+      // "/api": "http://151.248.118.164",
+      "/api":{
+        target: "http://localhost:5000",
+        rewrite(path) {
+          const data = path.replace("/api", "");
+          return data;
+        },
+      },
     },
   },
 

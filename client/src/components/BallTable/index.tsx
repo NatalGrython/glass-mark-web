@@ -1,4 +1,5 @@
 import React, { FC, Fragment } from "react";
+import { getItemReason } from "../BallTableAll";
 import { useMyBalls } from "./hooks/useMyBalls";
 import classNames from "./index.module.scss";
 
@@ -28,14 +29,33 @@ const BallTable: FC<BallTableProps> = () => {
             {my ? (
               my.transactions.map((item: any) => (
                 <Fragment key={item.hash}>
-                  <span className={classNames["ball-table__text"]}>
-                    {item.sender.surname} {item.sender.name}{" "}
-                    {item.sender.patronymic}
+                  <span
+                    className={
+                      typeof item.sender !== "string"
+                        ? classNames["ball-table__text"]
+                        : classNames["ball-table__danger_text"]
+                    }
+                  >
+                    {typeof item.sender === "string"
+                      ? "Администратор"
+                      : `${item.sender.surname} ${item.sender.name} ${item.sender.patronymic}`}
                   </span>
-                  <span className={classNames["ball-table__text"]}>
-                    {item.reason}
+                  <span
+                    className={
+                      typeof item.sender !== "string"
+                        ? classNames["ball-table__text"]
+                        : classNames["ball-table__danger_text"]
+                    }
+                  >
+                    {getItemReason(item, my.transactions)}
                   </span>
-                  <span className={classNames["ball-table__text"]}>
+                  <span
+                    className={
+                      typeof item.sender !== "string"
+                        ? classNames["ball-table__text"]
+                        : classNames["ball-table__danger_text"]
+                    }
+                  >
                     {item.value}
                   </span>
                 </Fragment>

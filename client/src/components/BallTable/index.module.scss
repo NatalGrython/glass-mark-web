@@ -38,7 +38,8 @@
 
   &__table {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 700px 1fr;
+
     grid-template-rows: 56px auto;
   }
 
@@ -47,5 +48,12 @@
     border-bottom: 1px solid $grey_color;
     padding-top: 20px;
     padding-bottom: 15px;
+  }
+  &__danger_text {
+    @include textRoboto(20px, 400, 23px, $black_color);
+    border-bottom: 1px solid $grey_color;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: rgb(255, 0, 0, 0.2);
   }
 }
