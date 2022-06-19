@@ -20,7 +20,6 @@ export class AuthService {
     try {
       const host = process.env.PROXY_SERVICE_HOST;
       const port = Number(process.env.PROXY_SERVICE_PORT);
-      console.log(host, port);
       return this.httpService
         .post(`http://${host}:${port}/auth/login`, loginUserDto)
         .pipe(
