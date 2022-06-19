@@ -7,6 +7,8 @@
     border-radius: 8px;
     padding-top: 28px;
     padding-bottom: 18px;
+    display: flex;
+    flex-direction: column;
   }
 
   &__inner_container {
@@ -53,5 +55,8 @@
         @include textRoboto(20px, 500, 23px, $primary_color);
       }
     }
+  }
+  .mining {
+    align-self: center;
   }
 }

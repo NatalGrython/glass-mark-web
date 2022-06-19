@@ -8,6 +8,7 @@ declare const classNames: {
   readonly text: "text";
   readonly controllers__container: "controllers__container";
   readonly btn: "btn";
+  readonly mining: "mining";
 };
 export default classNames;
 export type ClassNames =
@@ -19,4 +20,5 @@ export type ClassNames =
   | "title"
   | "text"
   | "controllers__container"
-  | "btn";
+  | "btn"
+  | "mining";

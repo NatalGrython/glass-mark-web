@@ -1,8 +1,10 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
+import Loader from "../../components/Loader";
 import Checkbox from "../../components/UI/CheckBox";
 import Input from "../../components/UI/Input";
 import Select from "../../components/UI/Select";
+import { miningSelector } from "../../store/transaction/selector";
 import { studentsSelector } from "../../store/user/selectors";
 import { useCreateTransaction } from "./hooks/useCreateTransaction";
 import classNames from "./index.module.scss";
@@ -10,9 +12,10 @@ import classNames from "./index.module.scss";
 interface AddBallsPageProps {}
 
 const AddBallsPage: FC<AddBallsPageProps> = () => {
-  const { handleSubmit, values, setFieldValue, handleChange } =
-    useCreateTransaction();
   const { students } = useSelector(studentsSelector);
+  const mining = useSelector(miningSelector);
+  const { handleSubmit, values, setFieldValue, handleChange } =
+    useCreateTransaction(students);
   return (
     <div className={classNames["add-balls"]}>
       <div className="container">
@@ -23,6 +26,7 @@ const AddBallsPage: FC<AddBallsPageProps> = () => {
               <div className={classNames.form}>
                 <span className={classNames.title}>ФИО студента: </span>
                 <Select
+                  //@ts-ignore
                   value={values.receiver}
                   onChange={(event) => {
                     setFieldValue("receiver", event.target.value);
@@ -76,6 +80,11 @@ const AddBallsPage: FC<AddBallsPageProps> = () => {
               </div>
             </div>
           </div>
+          {mining && (
+            <div className={classNames.mining}>
+              <Loader />
+            </div>
+          )}
         </div>
       </div>
     </div>

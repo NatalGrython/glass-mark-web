@@ -10,6 +10,7 @@ import { userWatcher } from "./user/saga";
 import { tableReducer } from "./table/reducer";
 import { tableWatcher } from "./table/saga";
 import { transactionWatcher } from "./transaction/saga";
+import { transactionReducer } from "./transaction/reducer";
 
 function* rootSaga() {
   yield all([
@@ -29,6 +30,7 @@ export const store = configureStore({
     node: nodesReducer,
     user: userReducer,
     table: tableReducer,
+    transaction: transactionReducer,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware);
